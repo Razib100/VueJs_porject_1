@@ -23,6 +23,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -42,21 +43,23 @@ export default {
       this.axios.get(uri).then(response => {
         this.item = response.data;
       });
+    },
+    updateItem() {
+      axios
+        .post(
+          "http://localhost/demo/api/demo/Update_item_by_id/data/" +
+            this.$route.params.id,
+          {
+            information: this.item
+            // id: this.$route.params.id
+          },
+          { "Content-Type": "application/x-www-form-urlencoded" }
+        )
+        .then(result => {
+          console.log(result.data);
+        });
+      window.location.href = "/index";
     }
-    // getItem()
-    // {
-    //   let uri = 'http://localhost:4000/items/edit/' + this.$route.params.id;
-    //     this.axios.get(uri).then((response) => {
-    //         this.item = response.data;
-    //     });
-    // },
-    // updateItem()
-    // {
-    //   let uri = 'http://localhost:4000/items/update/' + this.$route.params.id;
-    //     this.axios.post(uri, this.item).then((response) => {
-    //       this.$router.push({name: 'Index'});
-    //     });
-    // }
   }
 };
 </script>

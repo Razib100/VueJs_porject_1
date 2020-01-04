@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   // components: {
   //   name: "AddItem"
@@ -39,10 +40,20 @@ export default {
     };
   },
   methods: {
-    //   addItem() {
-    //        let uri = 'http://localhost:4000/items/add';
-    //         this.axios.post(uri, this.item).then(response => console.log(response.data));
-    //     }
+    addItem() {
+      axios
+        .post(
+          "http://localhost/demo/api/demo/Add_item/data/",
+          {
+            information: this.item
+          },
+          { "Content-Type": "application/x-www-form-urlencoded" }
+        )
+        .then(result => {
+          console.log(result.data);
+        });
+      window.location.href = "/Create";
+    }
   }
 };
 </script>

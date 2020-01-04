@@ -41,6 +41,7 @@
 </template>
 
 <script>
+// import axios from "axios";
 export default {
   data() {
     return {
@@ -58,12 +59,28 @@ export default {
       this.axios.get(uri).then(response => {
         this.items = response.data;
       });
+    },
+    deleteItem(id) {
+      let uri = "http://localhost/demo/api/demo/Delete_item_by_id/data/" + id;
+      this.items.splice(id, this.$route.params.id);
+      this.axios.get(uri);
+      window.location.href = "/index";
     }
-    // deleteItem(id)
-    // {
-    //   let uri = 'http://localhost:4000/items/delete/'+id;
-    //   this.items.splice(id, 1);
-    //   this.axios.get(uri);
+    // deleteItem() {
+    //   axios
+    //     .post(
+    //       "http://localhost/demo/api/demo/Delete_item_by_id/data/" +
+    //         this.$route.params.id,
+    //       {
+    //         information: this.item
+    //         // id: this.$route.params.id
+    //       },
+    //       { "Content-Type": "application/x-www-form-urlencoded" }
+    //     )
+    //     .then(result => {
+    //       console.log(result.data);
+    //     });
+    //   //window.location.href = "/index";
     // }
   }
 };
